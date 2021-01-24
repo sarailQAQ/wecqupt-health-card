@@ -1,0 +1,39 @@
+[user]
+    name = "" # 姓名
+    stu_num = "" # 学号
+    sex = "" # 性别
+    # 以下和抓包拿到的字段一样
+    openid = ""
+    location_big = "" #
+    location_small = ""
+    latitude = "" # 纬度
+    longitude = "" # 经度
+    szdq = ""
+    xxdz = ""
+    ywjcqzbl = "低风险"
+    ywjchblj = "无"
+    xjzdywqzb = "无"
+    twsfzc = "是"
+    ywytdzz = "无"
+    remarks = "无" # 备注
+
+[clock]
+    clocks = [8, 9, 10] # 打卡的时间（小时），有多个会从中随机选一个
+    range = 30 # 以分钟为单位，会在上述的时间上增加一些时间随机量，不超过60
+
+[email]
+    # 邮箱的账号密码，用于在打卡成功或失败时发送提示信息（自己的邮箱给自己发邮件）
+    # 如果用qq邮箱，password请填写授权码
+    address = ""
+    password = ""
+    host = "smtp.qq.com" # qq邮箱的服务器地址
+    port = "465" # 默认端口
+
+[settings]
+    immediate_work = "false" # 程序启动时是否立刻打卡，填true或者false
+    test_mail = "true" # 启动时测试邮箱
+    retry_when_failed = "false" # 打卡失败时重试
+    retry_time_gap = 60 # 当retry_when_failed="true"时生效，表示重试打卡的时间间隔，单位为分钟
+    retry_count_limit = 3 # 重试的次数限制
+    exit_after_retry_failed = "true" # 重试失败之后是否关闭程序
+    log_path = "messages.log" # 日志文件路径，如果不存在或者打开失败不会中断程序运行
