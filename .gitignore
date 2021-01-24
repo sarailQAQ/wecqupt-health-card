@@ -1,4 +1,5 @@
 wecqupt-health-card-*
-messages.log
+*.log
 *.exe
 main
+.idea
