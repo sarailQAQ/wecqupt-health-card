@@ -34,6 +34,7 @@ type ClockConfig struct {
 }
 
 type EmailConfig struct {
+	Enable   string `toml:"enable"`
 	Address  string `toml:"address"`
 	Password string `toml:"Password"`
 	Host     string `toml:"host"`
@@ -41,6 +42,7 @@ type EmailConfig struct {
 }
 
 type SettingsConfig struct {
+	Once                 string `toml:"once"`
 	ImmediateWork        string `toml:"immediate_work"`
 	TestMail             string `toml:"test_mail"`
 	RetryWhenFailed      string `toml:"retry_when_failed"`
@@ -48,6 +50,7 @@ type SettingsConfig struct {
 	RetryCountLimit      int    `toml:"retry_count_limit"`
 	ExitAfterRetryFailed string `toml:"exit_after_retry_failed"`
 	LogPath              string `toml:"log_path"`
+	RandomPos            string `toml:"random_position"`
 }
 
 type Config struct {

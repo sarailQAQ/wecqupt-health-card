@@ -8,6 +8,7 @@ import (
 	"log"
 	"math"
 	"math/rand"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -32,7 +33,7 @@ func NewManager(c Config) *Manager {
 	}
 }
 
-func (m *Manager) SendRequest() error {
+func (m *Manager) SendRequest(u UserConfig) error {
 	headers := map[string]string{
 		"Host":            "we.cqu.pt",
 		"Connection":      "keep-alive",
@@ -41,7 +42,6 @@ func (m *Manager) SendRequest() error {
 		"Referer":         "https://servicewechat.com/wx8227f55dc4490f45/76/page-frame.html",
 		"Accept-Encoding": "json",
 	}
-	u := m.C.User
 
 	u.Timestamp = time.Now().Unix()
 	u.Mrdkkey = util.GetKey(time.Now().Day(), time.Now().Hour())
@@ -95,7 +95,7 @@ func (m *Manager) judgeBool(s string) bool {
 }
 
 func (m *Manager) Work() {
-	c := &m.C
+	c := m.C
 	if m.judgeBool(c.Settings.TestMail) {
 		err := SendMail("邮箱现在可以用了哦", "^ ^", c.Email)
 		if err != nil {
@@ -103,19 +103,39 @@ func (m *Manager) Work() {
 		}
 	}
 
-	if m.judgeBool(c.Settings.ImmediateWork) {
-		err := m.SendRequest()
+	if m.judgeBool(c.Settings.ImmediateWork) || m.judgeBool(c.Settings.Once) {
+		err := m.SendRequest(c.User)
 		if err != nil {
 			go SendMail("打卡失败", "error: " + err.Error(), c.Email)
 			log.Println(err)
 		}
 	}
 
+	if m.judgeBool(c.Settings.Once) {
+		return
+	}
+
 	t := m.selectRandTime()
 	timer := time.NewTimer(t.Sub(time.Now()))
 	for {
 		<-timer.C
-		err := m.SendRequest()
+
+		if m.judgeBool(c.Settings.RandomPos) {
+			latitude, err := randPos(c.User.Latitude)
+			if err != nil {
+				log.Println(err)
+				latitude = c.User.Latitude
+			}
+			longitude, err := randPos(c.User.Longitude)
+			if err != nil {
+				log.Println(err)
+				longitude = c.User.Longitude
+			}
+
+			c.User.Latitude, c.User.Longitude = latitude, longitude
+		}
+
+		err := m.SendRequest(c.User)
 		if err != nil {
 			go SendMail("打卡失败！！！", "error: " + err.Error(), c.Email)
 			log.Println(err)
@@ -135,7 +155,7 @@ func (m *Manager) Work() {
 					}
 					<-ticker.C
 
-					err := m.SendRequest()
+					err := m.SendRequest(c.User)
 					if err == nil {
 						break
 					}
@@ -153,7 +173,17 @@ func (m *Manager) Work() {
 			go SendMail("打卡成功！", "芜湖起飞", c.Email)
 		}
 
+		c = m.C
 		t = m.selectRandTime()
 		timer.Reset(t.Sub(time.Now()))
 	}
+}
+
+func randPos(s string) (res string, err error){
+	x, err := strconv.ParseFloat(s, 64)
+	if err != nil {
+		return
+	}
+	x += float64(rand.Intn(6) - 3) * 0.00001
+	return strconv.FormatFloat(x, 'f', 5, 64), err
 }

@@ -3,10 +3,14 @@ package main
 import (
 	"github.com/sarailQAQ/wecqupt-health-card"
 	"log"
+	"math/rand"
 	"os"
+	"time"
 )
 
 func main() {
+	rand.Seed(time.Now().Unix())
+
 	c, err := wecqupt_health_card.ParseConfig()
 	if err != nil {
 		log.Println(err)

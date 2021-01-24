@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="11869aed-d684-4320-9dc9-ad76f3267a0d" name="Default Changelist" comment="" />
+    <list default="true" id="11869aed-d684-4320-9dc9-ad76f3267a0d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.toml" beforeDir="false" afterPath="$PROJECT_DIR$/config.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email.go" beforeDir="false" afterPath="$PROJECT_DIR$/email.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager_test.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +24,11 @@
     </option>
   </component>
   <component name="GOROOT" url="file://$PROJECT_DIR$/../../../Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1nQw5ZhHnMU8BnWM05vAxm3nq5O" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -35,7 +48,7 @@
       <recent name="D:\GoProjects\src\wecqupt-health-card\util" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/sarailQAQ/wecqupt-health-card/cmd">
+  <component name="RunManager" selected="Go Test.TestLog in github.com/sarailQAQ/wecqupt-health-card">
     <configuration name="go build github.com/sarailQAQ/wecqupt-health-card/cmd" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="wecqupt-health-card" />
       <working_directory value="$PROJECT_DIR$" />
@@ -67,6 +80,17 @@
       <pattern value="^\QTestParseConfig\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestRandPos in github.com/sarailQAQ/wecqupt-health-card" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="wecqupt-health-card" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/sarailQAQ/wecqupt-health-card" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestRandPos\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestSendMail in github.com/sarailQAQ/wecqupt-health-card" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="wecqupt-health-card" />
       <working_directory value="$PROJECT_DIR$" />
@@ -78,24 +102,13 @@
       <pattern value="^\QTestSendMail\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestSendRequest in github.com/sarailQAQ/wecqupt-health-card" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="wecqupt-health-card" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/sarailQAQ/wecqupt-health-card" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestSendRequest\E$" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/sarailQAQ/wecqupt-health-card/cmd" />
         <item itemvalue="Go Test.TestLog in github.com/sarailQAQ/wecqupt-health-card" />
         <item itemvalue="Go Test.TestParseConfig in github.com/sarailQAQ/wecqupt-health-card (1)" />
+        <item itemvalue="Go Test.TestRandPos in github.com/sarailQAQ/wecqupt-health-card" />
+        <item itemvalue="Go Build.go build github.com/sarailQAQ/wecqupt-health-card/cmd" />
         <item itemvalue="Go Test.TestSendMail in github.com/sarailQAQ/wecqupt-health-card" />
-        <item itemvalue="Go Test.TestSendRequest in github.com/sarailQAQ/wecqupt-health-card" />
       </list>
     </recent_temporary>
   </component>
