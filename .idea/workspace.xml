@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11869aed-d684-4320-9dc9-ad76f3267a0d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wecqupt-health-card-linux" beforeDir="false" afterPath="$PROJECT_DIR$/wecqupt-health-card-linux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.toml" beforeDir="false" afterPath="$PROJECT_DIR$/config.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages.log" beforeDir="false" afterPath="$PROJECT_DIR$/messages.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +45,7 @@
       <recent name="D:\GoProjects\src\wecqupt-health-card\util" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestLog in github.com/sarailQAQ/wecqupt-health-card">
+  <component name="RunManager" selected="Go Build.go build github.com/sarailQAQ/wecqupt-health-card/cmd">
     <configuration name="go build github.com/sarailQAQ/wecqupt-health-card/cmd" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="wecqupt-health-card" />
       <working_directory value="$PROJECT_DIR$" />
@@ -98,10 +101,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/sarailQAQ/wecqupt-health-card/cmd" />
         <item itemvalue="Go Test.TestLog in github.com/sarailQAQ/wecqupt-health-card" />
         <item itemvalue="Go Test.TestParseConfig in github.com/sarailQAQ/wecqupt-health-card (1)" />
         <item itemvalue="Go Test.TestRandPos in github.com/sarailQAQ/wecqupt-health-card" />
-        <item itemvalue="Go Build.go build github.com/sarailQAQ/wecqupt-health-card/cmd" />
         <item itemvalue="Go Test.TestSendMail in github.com/sarailQAQ/wecqupt-health-card" />
       </list>
     </recent_temporary>

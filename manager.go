@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/sarailQAQ/wecqupt-health-card/util"
 	"log"
 	"math"
@@ -68,6 +69,76 @@ func (m *Manager) SendRequest(u UserConfig) error {
 	return err
 }
 
+func (m *Manager) judgeBool(s string) bool {
+	s = strings.TrimSpace(s)
+	if strings.ToLower(s) == "true" || s == "1" {
+		return true
+	}
+	return false
+}
+
+
+// 根据config文件的内容发送请求
+func (m *Manager) SendReqAndRetry() error {
+	c := m.C
+
+	if m.judgeBool(c.Settings.RandomPos) {
+		latitude, err := randPos(c.User.Latitude)
+		if err != nil {
+			log.Println(err)
+			latitude = c.User.Latitude
+		}
+
+		longitude, err := randPos(c.User.Longitude)
+		if err != nil {
+			log.Println(err)
+			longitude = c.User.Longitude
+		}
+
+		c.User.Latitude, c.User.Longitude = latitude, longitude
+	}
+
+	err := m.SendRequest(c.User)
+	if err != nil {
+		go SendMail("打卡失败！！\n", "error: " + err.Error(), c.Email)
+		log.Println(err)
+
+		if m.judgeBool(c.Settings.RetryWhenFailed) {
+			now := time.Now()
+			end := time.Date(now.Year(), now.Month(), now.Day(), 23, 55, 30, 0, time.Local)
+			limit := int(math.Floor(end.Sub(now).Minutes()))
+			ticker := time.NewTicker(time.Duration(c.Settings.RetryCountLimit) * time.Minute)
+
+			var u, i = 0, 0
+			for ; i < c.Settings.RetryCountLimit; i++ {
+				u += c.Settings.RetryTimeGap
+				if u >= limit {
+					break
+				}
+				<-ticker.C
+
+				err = m.SendRequest(c.User)
+				if err == nil {
+					break
+				}
+
+				go SendMail("打卡失败！！！", "error: " + err.Error(), c.Email)
+				log.Println(err)
+			}
+
+			if (m.judgeBool(c.Settings.ExitAfterRetryFailed) || m.judgeBool(c.Settings.Once)) && (i == c.Settings.RetryCountLimit || u >= limit) {
+				err = errors.New("打卡失败且重试无效")
+				log.Println(err)
+				return err
+			}
+		}
+	} else {
+		go SendMail("打卡成功！", "芜湖起飞", c.Email)
+	}
+
+	return nil
+}
+
 func (m *Manager) selectRandTime() (t time.Time) {
 	clock := &m.C.Clock
 
@@ -86,14 +157,6 @@ func (m *Manager) selectRandTime() (t time.Time) {
 	return time.Date(now.Year(), now.Month(), now.Day(), hour, minute, sec, 0, time.Local).Add(24 * time.Hour)
 }
 
-func (m *Manager) judgeBool(s string) bool {
-	s = strings.TrimSpace(s)
-	if strings.ToLower(s) == "true" || s == "1" {
-		return true
-	}
-	return false
-}
-
 func (m *Manager) Work() {
 	c := m.C
 	if m.judgeBool(c.Settings.TestMail) {
@@ -104,14 +167,18 @@ func (m *Manager) Work() {
 	}
 
 	if m.judgeBool(c.Settings.ImmediateWork) || m.judgeBool(c.Settings.Once) {
-		err := m.SendRequest(c.User)
+		err := m.SendReqAndRetry()
 		if err != nil {
-			go SendMail("打卡失败", "error: " + err.Error(), c.Email)
-			log.Println(err)
+			fmt.Println(err)
+			return
 		}
 	}
 
 	if m.judgeBool(c.Settings.Once) {
+		fmt.Println("打卡成功！\n ^ ^")
+		fmt.Println("请按回车键以关闭程序")
+		var b byte
+		fmt.Scanf("%c", &b)
 		return
 	}
 
@@ -120,57 +187,9 @@ func (m *Manager) Work() {
 	for {
 		<-timer.C
 
-		if m.judgeBool(c.Settings.RandomPos) {
-			latitude, err := randPos(c.User.Latitude)
-			if err != nil {
-				log.Println(err)
-				latitude = c.User.Latitude
-			}
-			longitude, err := randPos(c.User.Longitude)
-			if err != nil {
-				log.Println(err)
-				longitude = c.User.Longitude
-			}
-
-			c.User.Latitude, c.User.Longitude = latitude, longitude
-		}
-
-		err := m.SendRequest(c.User)
+		err := m.SendReqAndRetry()
 		if err != nil {
-			go SendMail("打卡失败！！！", "error: " + err.Error(), c.Email)
-			log.Println(err)
-
-			if m.judgeBool(c.Settings.RetryWhenFailed) {
-				now := time.Now()
-				end := time.Date(now.Year(), now.Month(), now.Day(), 23, 55, 30, 0, time.Local)
-				limit := int(math.Floor(end.Sub(now).Minutes()))
-
-				u := 0
-				ticker := time.NewTicker(time.Duration(c.Settings.RetryCountLimit) * time.Minute)
-				i := 0
-				for ; i < c.Settings.RetryCountLimit; i++ {
-					u += c.Settings.RetryTimeGap
-					if u >= limit {
-						break
-					}
-					<-ticker.C
-
-					err := m.SendRequest(c.User)
-					if err == nil {
-						break
-					}
-					go SendMail("打卡失败！！！", "error: " + err.Error(), c.Email)
-				}
-				if m.judgeBool(c.Settings.ExitAfterRetryFailed) && (i == c.Settings.RetryCountLimit || u >= limit) {
-					err := SendMail("打卡助手即将关闭", "我太没用了qaq", c.Email)
-					if err != nil {
-						log.Println(err)
-					}
-					break
-				}
-			}
-		} else {
-			go SendMail("打卡成功！", "芜湖起飞", c.Email)
+			return
 		}
 
 		c = m.C
