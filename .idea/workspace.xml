@@ -7,6 +7,8 @@
       <change beforePath="$PROJECT_DIR$/config.toml" beforeDir="false" afterPath="$PROJECT_DIR$/config.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/manager.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/messages.log" beforeDir="false" afterPath="$PROJECT_DIR$/messages.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wecqupt-health-card-linux" beforeDir="false" afterPath="$PROJECT_DIR$/wecqupt-health-card-linux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wecqupt-health-card-win.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
