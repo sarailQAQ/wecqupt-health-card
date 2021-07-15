@@ -55,7 +55,7 @@ func (m *Manager) SendRequest(u UserConfig) error {
 	decodeString := base64.StdEncoding.EncodeToString(b)
 	reqBody := ReqBody{Key: decodeString}
 
-	code, body, err := util.Post("https://we.cqu.pt/api/mrdk/post_mrdk_info.php", headers, reqBody)
+	code, body, err := util.Post(url, headers, reqBody)
 	if err != nil {
 		log.Println(err)
 		return err
