@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func Post(url string, headers map[string]string, body interface{}) (code int, resBody []byte, err error){
+func Post(url string, headers map[string]string, body interface{}) (code int, resBody []byte, err error) {
 	payload, err := json.Marshal(body)
 	if err != nil {
 		return

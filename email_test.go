@@ -6,7 +6,7 @@ import (
 )
 
 func TestSendMail(t *testing.T) {
-	c, _ := ParseConfig()
+	c, _ := TestParseConfig("./cmd/config.toml")
 	err := SendMail("test", "Hello world.", c.Email)
 	log.Println(err)
 }

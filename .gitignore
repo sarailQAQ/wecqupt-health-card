@@ -1,8 +1,5 @@
-*.log
+wecqupt-health-card-*
+messages.log
+*.exe
 main
 .idea
-.git
-*.exe
-wecqupt-health-card-linux
-wecqupt-health-card-amd64.exe
-config-sarail.toml

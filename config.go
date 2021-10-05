@@ -8,10 +8,9 @@ import (
 )
 
 type UserConfig struct {
-	Name          string `toml:"name" json:"name"`
-	StuNum        string `toml:"stu_num" json:"xh"`
-	Sex           string `toml:"sex" json:"xb"`
-	Openid        string `toml:"openid" json:"openid"`
+	Name string `toml:"name" json:"name"`
+	Sex  string `toml:"sex" json:"xb"`
+	BasicInfo
 	LocationBig   string `toml:"location_big" json:"locationBig"`
 	LocationSmall string `toml:"location_small" json:"locationSmall"`
 	Latitude      string `toml:"latitude" json:"latitude"`
@@ -25,7 +24,11 @@ type UserConfig struct {
 	Ywytdzz       string `toml:"ywytdzz" json:"ywytdzz"`
 	Remarks       string `toml:"remarks" json:"beizhu"`
 	Mrdkkey       string `toml:"-" json:"mrdkkey"`
-	Timestamp     int64  `tomll:"-" json:"timestamp"`
+}
+type BasicInfo struct {
+	StuNum    string `toml:"stu_num" json:"xh"`
+	Openid    string `toml:"openid" json:"openid"`
+	Timestamp int64  `toml:"-" json:"timestamp"`
 }
 
 type ClockConfig struct {
@@ -60,8 +63,30 @@ type Config struct {
 	Settings SettingsConfig `toml:"settings"`
 }
 
-func ParseConfig() (c Config, err error) {
-	fp, err := os.Open("config.toml")
+func ParseConfig(config []byte) (c Config, err error) {
+	/*fp, err := os.Open("config.toml")
+	if err != nil {
+		log.Println("open config file:", err)
+		return
+	}
+	defer fp.Close()
+
+	content, err := ioutil.ReadAll(fp)
+	if err != nil {
+		log.Println("read file error:", err)
+		return
+	}*/
+
+	err = toml.Unmarshal(config, &c)
+	if err != nil {
+		log.Println("parse config error", err)
+		return
+	}
+
+	return
+}
+func TestParseConfig(file string) (c Config, err error) {
+	fp, err := os.Open(file)
 	if err != nil {
 		log.Println("open config file:", err)
 		return

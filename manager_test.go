@@ -6,7 +6,7 @@ import (
 )
 
 func TestSendRequest(t *testing.T) {
-	c, _ := ParseConfig()
+	c, _ := TestParseConfig("./cmd/config.toml")
 	_ = NewManager(c).SendRequest(c.User)
 }
 

@@ -12,10 +12,10 @@ func SendMail(subject, body string, mailInfo EmailConfig) error {
 	}
 
 	m := gomail.NewMessage()
-	m.SetHeader("To", mailInfo.Address) // 收件人
+	m.SetHeader("To", mailInfo.Address)                   // 收件人
 	m.SetAddressHeader("From", mailInfo.Address, "打卡助手菌") // 发件人
-	m.SetHeader("Subject", subject) // 主题
-	m.SetBody("text/html", body) // 正文
+	m.SetHeader("Subject", subject)                       // 主题
+	m.SetBody("text/html", body)                          // 正文
 
 	port, err := strconv.Atoi(mailInfo.Port)
 	if err != nil {
