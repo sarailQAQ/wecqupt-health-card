@@ -77,8 +77,7 @@ func (m *Manager) judgeBool(s string) bool {
 	return false
 }
 
-
-// 根据config文件的内容发送请求
+// SendReqAndRetry 根据config文件的内容发送请求
 func (m *Manager) SendReqAndRetry() error {
 	c := m.C
 
