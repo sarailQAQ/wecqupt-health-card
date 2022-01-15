@@ -1,7 +1,7 @@
 [user]
     name = ""       # 姓名
     stu_num = ""    # 学号
-    sex = ""        # 性别
+    sex = ""        # 性别，"男"或"女"
     # 以下和抓包拿到的字段一样
     openid = ""
     location_big = ""
@@ -32,9 +32,9 @@
     port = "465"            # 默认端口
 
 [settings]
-    once = "false"                      # 一次性模式，程序运行后是否只打卡一次就结束
-    immediate_work = "false"            # 程序启动时是否立刻打卡，填true或者false
     test_mail = "true"                  # 启动时是否测试邮箱
+    once = "false"                      # 一次性模式，程序运行后是否只打卡一次就结束。若为true，则之后的配置均无效
+    immediate_work = "false"            # 程序启动时是否立刻打卡，填true或者false
     retry_when_failed = "false"         # 打卡失败时是否重试
     retry_time_gap = 60                 # 当retry_when_failed="true"时生效，表示重试打卡的时间间隔，单位为分钟
     retry_count_limit = 3               # 当retry_when_failed="true"时生效，重试的次数限制
