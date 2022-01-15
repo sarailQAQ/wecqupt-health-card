@@ -46,6 +46,6 @@
 
 **github  actions**
 
-fork项目，修改项目中的./cmd/config.toml以及./.github文/workflows/main.yml文件后，push到自己的仓库即可。
+fork项目，修改项目中的./cmd/config.toml以及./.github/workflows/main.yml文件后，push到自己的仓库即可。
 
 此时建议使用单次打卡模式。
