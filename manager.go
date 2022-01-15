@@ -154,6 +154,8 @@ func (m *Manager) Work() {
 		err := SendMail("邮箱现在可以用了哦", "^ ^", c.Email)
 		if err != nil {
 			log.Println(err)
+		} else {
+			log.Println("mail testing passed")
 		}
 	}
 
@@ -161,7 +163,11 @@ func (m *Manager) Work() {
 		err := m.SendRequest(c.User)
 		if err != nil {
 			go SendMail("打卡失败", "error: "+err.Error(), c.Email)
+			log.Println("打卡失败")
 			log.Println(err)
+		} else {
+			SendMail("打卡成功！", "芜湖起飞", c.Email)
+			log.Println("打卡成功")
 		}
 	}
 
@@ -225,6 +231,7 @@ func (m *Manager) Work() {
 			}
 		} else {
 			go SendMail("打卡成功！", "芜湖起飞", c.Email)
+			log.Println("打卡成功")
 		}
 
 		c = m.C
