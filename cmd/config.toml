@@ -17,6 +17,7 @@
     twsfzc = "是"
     ywytdzz = "无"
     remarks = "无" # 备注
+    jkmresult = "绿色"
 
 [clock]
     clocks = [8, 9, 10] # 打卡的时间（小时），有多个会从中随机选一个

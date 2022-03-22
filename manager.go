@@ -37,6 +37,7 @@ type DakaResponse struct {
 	Message string   `json:"message"`
 	Data    []string `json:"data"`
 }
+
 type ListResponse struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
@@ -59,7 +60,7 @@ func NewManager(c Config) *Manager {
 	}
 }
 func IsDaka(u UserConfig) bool {
-	nowtime := time.Now()
+	now := time.Now()
 	b, err := json.Marshal(u.BasicInfo)
 	if err != nil {
 		log.Println(err)
@@ -85,7 +86,7 @@ func IsDaka(u UserConfig) bool {
 			log.Println(err)
 			continue
 		}
-		if nowtime.Day() == parse.Day() {
+		if now.Day() == parse.Day() {
 			return true
 		}
 	}

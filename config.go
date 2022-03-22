@@ -8,9 +8,10 @@ import (
 )
 
 type UserConfig struct {
-	Name string `toml:"name" json:"name"`
-	Sex  string `toml:"sex" json:"xb"`
 	BasicInfo
+
+	Name          string `toml:"name" json:"name"`
+	Sex           string `toml:"sex" json:"xb"`
 	LocationBig   string `toml:"location_big" json:"locationBig"`
 	LocationSmall string `toml:"location_small" json:"locationSmall"`
 	Latitude      string `toml:"latitude" json:"latitude"`
@@ -25,6 +26,7 @@ type UserConfig struct {
 	Remarks       string `toml:"remarks" json:"beizhu"`
 	Mrdkkey       string `toml:"-" json:"mrdkkey"`
 }
+
 type BasicInfo struct {
 	StuNum    string `toml:"stu_num" json:"xh"`
 	Openid    string `toml:"openid" json:"openid"`
@@ -63,8 +65,8 @@ type Config struct {
 	Settings SettingsConfig `toml:"settings"`
 }
 
-func ParseConfig(config []byte) (c Config, err error) {
-	/*fp, err := os.Open("config.toml")
+func ParseConfig() (c Config, err error) {
+	fp, err := os.Open("config.toml")
 	if err != nil {
 		log.Println("open config file:", err)
 		return
@@ -75,9 +77,9 @@ func ParseConfig(config []byte) (c Config, err error) {
 	if err != nil {
 		log.Println("read file error:", err)
 		return
-	}*/
+	}
 
-	err = toml.Unmarshal(config, &c)
+	err = toml.Unmarshal(content, &c)
 	if err != nil {
 		log.Println("parse config error", err)
 		return

@@ -8,13 +8,13 @@ import (
 	"time"
 )
 
-//go:embed config.toml
-var config []byte
+////go:embed config.toml
+//var config []byte
 
 func main() {
 	rand.Seed(time.Now().Unix())
 
-	c, err := wecqupt_health_card.ParseConfig(config)
+	c, err := wecqupt_health_card.ParseConfig()
 	if err != nil {
 		log.Println(err)
 		return
